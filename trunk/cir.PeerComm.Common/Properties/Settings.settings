@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="cir.PeerComm.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UseCustomResolver" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CustomResolverURI" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">yourserver:yourport</Value>
+    </Setting>
+    <Setting Name="CustomeResolverName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ResovlerName</Value>
+    </Setting>
+    <Setting Name="ActAsCustomResolver" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
