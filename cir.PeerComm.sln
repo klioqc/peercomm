@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cir.PeerComm", "cir.PeerComm.Common\cir.PeerComm.csproj", "{F006A431-09E0-4770-AF0F-16457AB62DBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cir.PeerComm.ClientExample", "cir.PeerComm.ClientExample\cir.PeerComm.ClientExample.csproj", "{9D8A0659-0358-4E88-9D84-5A3CEE570DEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F006A431-09E0-4770-AF0F-16457AB62DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F006A431-09E0-4770-AF0F-16457AB62DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F006A431-09E0-4770-AF0F-16457AB62DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F006A431-09E0-4770-AF0F-16457AB62DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D8A0659-0358-4E88-9D84-5A3CEE570DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D8A0659-0358-4E88-9D84-5A3CEE570DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D8A0659-0358-4E88-9D84-5A3CEE570DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D8A0659-0358-4E88-9D84-5A3CEE570DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
