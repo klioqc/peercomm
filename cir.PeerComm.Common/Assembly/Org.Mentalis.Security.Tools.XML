@@ -1,0 +1,471 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Org.Mentalis.Security.Tools</name>
+    </assembly>
+    <members>
+        <member name="T:Org.Mentalis.Security.Tools.StrongNameFile">
+            <summary>
+            Represents a Strong Name file (also known as an SNK file).
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.Security.Cryptography.RSA)">
+            <summary>
+            Initializes a new instance of the StrongNameFile class.
+            </summary>
+            <param name="rsa">The private key that this strong name file represents.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="rsa"/> is a null reference.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.Security.Cryptography.RSAParameters)">
+            <summary>
+            Initializes a new instance of the StrongNameFile class.
+            </summary>
+            <param name="rsa">The private key that this strong name file represents.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="rsa"/> contains invalid data.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the StrongNameFile class.
+            </summary>
+            <param name="file">The path to the SNK file to open.</param>
+            <exception cref="T:System.IO.FileNotFoundException">The file cannot be found.</exception>
+            <exception cref="T:System.IO.InvalidDataException">The file contains invalid data.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.IO.FileInfo)">
+            <summary>
+            Initializes a new instance of the StrongNameFile class.
+            </summary>
+            <param name="file">The SNK file to open.</param>
+            <exception cref="T:System.IO.FileNotFoundException">The file cannot be found.</exception>
+            <exception cref="T:System.IO.InvalidDataException">The file contains invalid data.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Save(System.String)">
+            <summary>
+            Saves this StrongNameFile instance to disk in the SNK file format.
+            </summary>
+            <param name="fileName">The filename to save to.</param>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+            <exception cref="T:System.NotSupportedException">The data cannot be exported.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="fileName"/> is a null reference.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Save(System.String,System.Boolean)">
+            <summary>
+            Saves this StrongNameFile instance to disk in the SNK file format.
+            </summary>
+            <param name="fileName">The filename to save to.</param>
+            <param name="includePrivateKey"><b>true</b> if the private key must be included, <b>false</b> otherwise.</param>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+            <exception cref="T:System.NotSupportedException">The private key is not available or the data cannot be exported.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="fileName"/> is a null reference.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Dispose">
+            <summary>
+            Releases all managed and unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Finalize">
+            <summary>
+            Releases all managed and unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.StrongNameFile.HasPrivateKey">
+            <summary>
+            Gets a value that indicates whether the SNK file contains a private key or not.
+            </summary>
+            <value><b>true</b> if the file contains a private key, <b>false</b> otherwise.</value>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.StrongNameFile.PublicKey">
+            <summary>
+            Gets an <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the public key.
+            </summary>
+            <value>An <see cref="T:System.Security.Cryptography.RSA"/> instance.</value>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.StrongNameFile.PrivateKey">
+            <summary>
+            Gets an <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the public/private key pair.
+            </summary>
+            <value>An <see cref="T:System.Security.Cryptography.RSA"/> instance.</value>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+            <exception cref="T:System.NotSupportedException">The private key is not available.</exception>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.X509CertificateGenerator">
+            <summary>
+            Generates self-signed X509 certificates.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.X509CertificateGenerator.Create(System.Security.Cryptography.RSACryptoServiceProvider,System.String)">
+            <summary>
+            Creates and returns a self-signed X509 certificate.
+            </summary>
+            <param name="key">The key of the certificate.</param>
+            <param name="issuerName">The encoded common name of the issuer.</param>
+            <returns>An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance.</returns>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while creating the self-signed certificate.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.X509CertificateGenerator.Create(System.Security.Cryptography.RSACryptoServiceProvider,System.String,Org.Mentalis.Security.Tools.CertificateSettings)">
+            <summary>
+            Creates and returns a self-signed X509 certificate.
+            </summary>
+            <param name="key">The key of the certificate.</param>
+            <param name="issuerName">The encoded common name of the issuer.</param>
+            <param name="settings">The settings of the X509 certificate.</param>
+            <returns>An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance.</returns>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while creating the self-signed certificate.</exception>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.PrivateKeyFile">
+            <summary>
+            The PrivateKeyFile class represents a Private Key file (also known as a PVK
+            file). It can load PVK files and associate them with their corresponding
+            X509 certificates.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.#ctor(System.String)">
+            <summary>
+            Initializes a new PrivateKeyFile instance.
+            </summary>
+            <param name="pvkFile">The file to load.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="pvkFile"/> is a null reference -or- a password is required.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">The specified file could not be found.</exception>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while decrypting the file.</exception>
+            <exception cref="T:System.IO.InvalidDataException">The file is invalid.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new PrivateKeyFile instance.
+            </summary>
+            <param name="pvkFile">The file to load.</param>
+            <param name="password">The password, if any.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="pvkFile"/> is a null reference -or- a password is required and <paramref name="password"/> is a null reference.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">The specified file could not be found.</exception>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while decrypting the file.</exception>
+            <exception cref="T:System.IO.InvalidDataException">The file is invalid.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.AssociateWith(System.Security.Cryptography.X509Certificates.X509Certificate)">
+            <summary>
+            Associates this private key instance with the corresponding X509 certificate.
+            </summary>
+            <param name="certificate">An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance to associate the key with.</param>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while associating the private key with the certificate.</exception>
+            <remarks>The key will be imported as an exportable key.</remarks>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.AssociateWith(System.Security.Cryptography.X509Certificates.X509Certificate,System.Boolean)">
+            <summary>
+            Associates this private key instance with the corresponding X509 certificate.
+            </summary>
+            <param name="certificate">An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance to associate the key with.</param>
+            <param name="exportable"><b>true</b> if the key should be marked as exportable, <b>false</b> otherwise.</param>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while associating the private key with the certificate.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.Dispose">
+            <summary>
+            Releases all managed and unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.Finalize">
+            <summary>
+            Releases all managed and unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.RSAExponentOfOne">
+            <summary>
+            The RSAExponentOfOne class generates so-called 'exponent-of-one' RSA keys. These keys are
+            special RSA keys, in the sense that the output buffer matches the input buffer for an
+            RSA encryption or decryption. Practically, this means that if you generate a key-exchange
+            message using a RSAPKCS1KeyExchangeFormatter class that was initialized with such a special
+            key, the resulting key exchange buffer will include the secret key unencrypted.
+            Exponent-of-one keys are very useful when you're in the debugging stage of your application.
+            You can use these keys instead of 'normal' RSA keys, and the entire system keeps working
+            as expected. The only difference is that the 'encrypted' data is the same as the unencrypted
+            data - a very useful feature for debugging purposes.
+            </summary>
+            <remarks>
+            Exponent-of-one keys should <b>never</b> be used in production! They do not offer any
+            security whatsoever.
+            </remarks>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.RSAExponentOfOne.Create">
+            <summary>
+            Creates a new exponent-of-one key.
+            </summary>
+            <returns>An <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the exponen-of-one key.</returns>
+            <remarks>The modulus length of this key will be 1024 bits.</remarks>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.RSAExponentOfOne.Create(System.Int32)">
+            <summary>
+            Creates a new exponent-of-one key.
+            </summary>
+            <param name="bitLength">The length of the modulus, in bits.</param>
+            <returns>An <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the exponen-of-one key.</returns>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.ARCFourManagedTransform">
+            <summary>
+            Represents an ARCFour managed ICryptoTransform.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.ARCFourManagedTransform.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the ARCFourManagedTransform class.
+            </summary>
+            <param name="key">The key used to initialize the ARCFour state.</param>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.ARCFourManagedTransform.TransformBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Transforms the specified region of the input byte array and copies the resulting transform to the specified region of the output byte array.
+            </summary>
+            <param name="inputBuffer">The input for which to compute the transform.</param>
+            <param name="inputOffset">The offset into the input byte array from which to begin using data.</param>
+            <param name="inputCount">The number of bytes in the input byte array to use as data.</param>
+            <param name="outputBuffer">The output to which to write the transform.</param>
+            <param name="outputOffset">The offset into the output byte array from which to begin writing data.</param>
+            <returns>The number of bytes written.</returns>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inputBuffer"/> or <paramref name="outputBuffer"/> is a null reference (<b>Nothing</b> in Visual Basic).</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="inputOffset"/>, <paramref name="inputCount"/> or <paramref name="outputOffset"/> is invalid.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.ARCFourManagedTransform.TransformFinalBlock(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Transforms the specified region of the specified byte array.
+            </summary>
+            <param name="inputBuffer">The input for which to compute the transform.</param>
+            <param name="inputOffset">The offset into the byte array from which to begin using data.</param>
+            <param name="inputCount">The number of bytes in the byte array to use as data.</param>
+            <returns>The computed transform.</returns>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="inputBuffer"/> is a null reference (<b>Nothing</b> in Visual Basic).</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="inputOffset"/> or <paramref name="inputCount"/> is invalid.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.ARCFourManagedTransform.Init">
+            <summary>
+            This method (re)initializes the cipher.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.ARCFourManagedTransform.Dispose">
+            <summary>
+            Disposes of the cryptographic parameters.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.ARCFourManagedTransform.Finalize">
+            <summary>
+            Finalizes the object.
+            </summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ARCFourManagedTransform.m_Key">
+            <summary>
+            Holds the key that is used to initialize the ARCFour state.
+            </summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ARCFourManagedTransform.m_KeyLen">
+            <summary>
+            Holds the length of the key, in bytes.
+            </summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ARCFourManagedTransform.m_Permutation">
+            <summary>
+            Holds state information.
+            </summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ARCFourManagedTransform.m_Index1">
+            <summary>
+            Holds state information.
+            </summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ARCFourManagedTransform.m_Index2">
+            <summary>
+            Holds state information.
+            </summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ARCFourManagedTransform.m_Disposed">
+            <summary>
+            Holds a boolean that indicates whether the class has been disposed of or not.
+            </summary>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.ARCFourManagedTransform.CanReuseTransform">
+            <summary>
+            Gets a value indicating whether the current transform can be reused.
+            </summary>
+            <value>This property returns <b>true</b>.</value>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.ARCFourManagedTransform.CanTransformMultipleBlocks">
+            <summary>
+            Gets a value indicating whether multiple blocks can be transformed.
+            </summary>
+            <value>This property returns <b>true</b>.</value>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.ARCFourManagedTransform.InputBlockSize">
+            <summary>
+            Gets the input block size.
+            </summary>
+            <value>This property returns 1.</value>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.ARCFourManagedTransform.OutputBlockSize">
+            <summary>
+            Gets the output block size.
+            </summary>
+            <value>This property returns 1.</value>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.CryptoProviderHandle">
+            <summary>
+            Encapsulates a CSP handle.
+            </summary>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.CertificateSettings">
+            <summary>
+            Holds the different settings for the self-signed certificate generation process.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.CertificateSettings.#ctor">
+            <summary>
+            Initializes a new version of the CertificateSettings class.
+            </summary>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.CertificateSettings.StartDate">
+            <summary>
+            Gets or sets a value that represents the start date of the certificate.
+            </summary>
+            <value>A <see cref="T:System.DateTime"/> instance.</value>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.CertificateSettings.EndDate">
+            <summary>
+            Gets or sets a value that represents the end date of the certificate.
+            </summary>
+            <value>A <see cref="T:System.DateTime"/> instance.</value>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.CertificateSettings.SignCertificate">
+            <summary>
+            Gets or sets a value that indicates whether the certificate should be signed.
+            </summary>
+            <value><b>true</b> if a signature must be generated, <b>false</b> otherwise.</value>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.CertificateSettings.ReferencePrivateKey">
+            <summary>
+            Gets or sets a value that indicates whether the certificate must reference its private key.
+            </summary>
+            <value><b>true</b> if the private key must be referenced, <b>false</b> otherwise.</value>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.CertificateSettings.Extensions">
+            <summary>
+            Gets a collection of X509 extensions.
+            </summary>
+            <value>A <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection"/> instance.</value>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.CommonCertificateExtensions">
+            <summary>
+            This class contains builder methods to generate X509Extension instances
+            for some of the more common extensions.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.CommonCertificateExtensions.CreateKeyUsageExtension(Org.Mentalis.Security.Tools.KeyUsageExtension)">
+            <summary>
+            Creates a Key Usage extension.
+            </summary>
+            <param name="keyUsage">One of the <see cref="T:Org.Mentalis.Security.Tools.KeyUsageExtension"/> values.</param>
+            <returns>A <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension"/> instance.</returns>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.CommonCertificateExtensions.CreateKeyUsageExtension(Org.Mentalis.Security.Tools.KeyUsageExtension,System.Boolean)">
+            <summary>
+            Creates a Key Usage extension.
+            </summary>
+            <param name="keyUsage">One of the <see cref="T:Org.Mentalis.Security.Tools.KeyUsageExtension"/> values.</param>
+            <param name="critical"><b>true</b> if the extension is marked as critical, <b>false</b> otherwise.</param>
+            <returns>A <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension"/> instance.</returns>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.CommonCertificateExtensions.CreateBasicConstraintsExtension(System.Boolean)">
+            <summary>
+            Creates a Basic Constraints extension.
+            </summary>
+            <param name="isCA"><b>true</b> if this certificate represents a certificate authority, <b>false</b> otherwise.</param>
+            <returns>A <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension"/> instance.</returns>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.CommonCertificateExtensions.CreateBasicConstraintsExtension(System.Boolean,System.Int32,System.Boolean)">
+            <summary>
+            Creates a Basic Constraints extension.
+            </summary>
+            <param name="isCA"><b>true</b> if this certificate represents a certificate authority, <b>false</b> otherwise.</param>
+            <param name="pathLength">The maximum length of the validation path.</param>
+            <param name="critical"><b>true</b> if the extension is marked as critical, <b>false</b> otherwise.</param>
+            <returns>A <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension"/> instance.</returns>
+            <remarks>If <paramref name="pathLength"/> is less than or equal to zero, then the path length is omitted from the extension.</remarks>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.CommonCertificateExtensions.CreateInvalidityDateExtension(System.DateTime)">
+            <summary>
+            Creates a Invalidity Date extension.
+            </summary>
+            <param name="invalidityDate">The date from when the certificate became invalid.</param>
+            <returns>A <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension"/> instance.</returns>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.CommonCertificateExtensions.CreateCRLNumberExtension(System.Int32)">
+            <summary>
+            Creates a CRL Number extension.
+            </summary>
+            <param name="crlNumber">The number of the CRL.</param>
+            <returns>A <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension"/> instance.</returns>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.CommonCertificateExtensions.CreateReasonCodeExtension(Org.Mentalis.Security.Tools.ReasonCodeExtension)">
+            <summary>
+            Creates a Reason Code extension.
+            </summary>
+            <param name="reason">One of the <see cref="T:Org.Mentalis.Security.Tools.ReasonCodeExtension"/> values.</param>
+            <returns>A <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension"/> instance.</returns>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.KeyUsageExtension">
+            <summary>
+            Defines the different certificate key usage schemes.
+            </summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.KeyUsageExtension.DigitalSignature">
+            <summary>Used for digital signatures</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.KeyUsageExtension.NonRepudiation">
+            <summary>Used for non-repudiation</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.KeyUsageExtension.KeyEncipherment">
+            <summary>Used for key encipherment</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.KeyUsageExtension.DataEncipherment">
+            <summary>Used for data encipherment</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.KeyUsageExtension.KeyAgreement">
+            <summary>Used for key agreement</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.KeyUsageExtension.KeyCertificateSign">
+            <summary>Used for certificate signing</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.KeyUsageExtension.CrlSign">
+            <summary>Used for CRL signing</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.KeyUsageExtension.EnciphermentOnly">
+            <summary>Used for encipherment only</summary>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.ReasonCodeExtension">
+            <summary>
+            Defines the different certificate revocation reason codes.
+            </summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ReasonCodeExtension.Unspecified">
+            <summary>Unspecified reason</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ReasonCodeExtension.KeyCompromise">
+            <summary>The certificate key was compomised</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ReasonCodeExtension.CACompromise">
+            <summary>The Certificate Authority was compromised</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ReasonCodeExtension.AffiliationChanged">
+            <summary>The affiliations have changed</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ReasonCodeExtension.Superseded">
+            <summary>The certificate has been superseded</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ReasonCodeExtension.CessationOfOperation">
+            <summary>Operations have ceased</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ReasonCodeExtension.CertificateHold">
+            <summary>The certificate is on hold</summary>
+        </member>
+        <member name="F:Org.Mentalis.Security.Tools.ReasonCodeExtension.RemoveFromCRL">
+            <summary>The certificate must be removed from the CRL (because it has expired anyway). This is only used for delta-CRLs.</summary>
+        </member>
+    </members>
+</doc>
