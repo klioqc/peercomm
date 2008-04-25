@@ -1,0 +1,7 @@
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\obj\Debug\ResolveAssemblyReference.cache
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\cir.PeerComm.Test.exe
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\cir.PeerComm.Test.pdb
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\obj\Debug\cir.PeerComm.Test.exe
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\obj\Debug\cir.PeerComm.Test.pdb
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\ea.MathUtils.dll
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\ea.MathUtils.pdb

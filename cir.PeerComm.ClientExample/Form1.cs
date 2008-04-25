@@ -22,15 +22,19 @@ namespace cir.PeerComm.ClientExample
 
         private void _MakeCert_Click(object sender, EventArgs e)
         {
-            X509Certificate2 cert = cir.PeerComm.Certificate.CreateCertificate("FiveInchFish", "c:\\fif.cer");
+            bool certMade = cir.PeerComm.Security.Certificate.CreateCertificate("FiveInchFish", "fif", cir.PeerComm.Security.Certificate.KeyTypes.exchange,"BlahBlahBlah");
+            X509Certificate2 cert = cir.PeerComm.Security.Certificate.ReadCert("fif.pfx");
 
             if (cert != null)
-            { Debug.WriteLine(cert.ToString()); }
+            { 
+                Debug.WriteLine(cert.ToString());
+                Debug.WriteLine(cert.PrivateKey.ToString());
+            }
         }
 
         private void _MakeSatAss_Click(object sender, EventArgs e)
         {
-            cir.PeerComm.Certificate.buildSatelliteAssembly();
+            //cir.PeerComm.Security.Certificate.buildSatelliteAssembly();
         }
     }
 }

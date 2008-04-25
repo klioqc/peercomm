@@ -22,7 +22,7 @@ namespace cir.PeerComm
         private ServiceHost _ResolverServiceHost;
 
         /// <summary>
-        /// Handles client connections
+        /// Handles Peer connections
         /// </summary>
         private CustomPeerResolverService _ResolverService;
         

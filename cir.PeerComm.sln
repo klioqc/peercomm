@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cir.PeerComm", "cir.PeerCom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cir.PeerComm.ClientExample", "cir.PeerComm.ClientExample\cir.PeerComm.ClientExample.csproj", "{9D8A0659-0358-4E88-9D84-5A3CEE570DEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cir.PeerComm.Test", "cir.PeerComm.Test\cir.PeerComm.Test.csproj", "{3BE01363-16FB-46A8-85F4-1C73F33E076F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ea.MathUtils", "..\..\ea\ea.Math\ea.MathUtils.csproj", "{A2329BDC-3DA4-42C9-98F1-02053E64E825}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{9D8A0659-0358-4E88-9D84-5A3CEE570DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D8A0659-0358-4E88-9D84-5A3CEE570DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D8A0659-0358-4E88-9D84-5A3CEE570DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BE01363-16FB-46A8-85F4-1C73F33E076F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BE01363-16FB-46A8-85F4-1C73F33E076F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BE01363-16FB-46A8-85F4-1C73F33E076F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BE01363-16FB-46A8-85F4-1C73F33E076F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2329BDC-3DA4-42C9-98F1-02053E64E825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2329BDC-3DA4-42C9-98F1-02053E64E825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2329BDC-3DA4-42C9-98F1-02053E64E825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2329BDC-3DA4-42C9-98F1-02053E64E825}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,28 +7,56 @@ using System.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.ServiceModel.PeerResolvers;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+
+
 
 using System.Diagnostics;
 
 namespace cir.PeerComm
 {
     /// <summary>
-    /// A simple WCF PeerChannel client that allows for custom node and message types
+    /// A simple WCF PeerChannel Peer that allows for custom node and message types
     /// </summary>
     /// <typeparam name="Object"></typeparam>
     /// <typeparam name="Object"></typeparam>
-    public class CommNode : IComm
+    internal class CommChannel : IComm
     {
 
-        public delegate void PeerNodeConnectedDelegate(Object Client);
-        public delegate void PeerNodeDisconnectedDelegate(Object Client); 
+        public delegate void PeerNodeConnectedDelegate(IPeer Peer);
+        public delegate void PeerNodeDisconnectedDelegate(IPeer Peer);
+
+        /// <summary>
+        /// Used to verify a message isn't spoofed by a rogue client.
+        /// 
+        /// The certs already in use make sure the communication is from an authorized client
+        /// but this makes sure a client doesn't lie about who it is.  We could use certs for this
+        /// too but it's not that complicated so this should work fine.
+        /// </summary>
+        private Guid _PrivateGuid = Guid.NewGuid();
+        
+        /// <summary>
+        /// The Public GUID (Peer.ID) is concatinated to the _PrivateGuid then MD5'd to give this value
+        /// If 
+        /// </summary>
+        private string MD5Hash = "";
+
+        /// <summary>
+        /// Stores information about the Peer that created this communications node
+        /// </summary>
+        private IPeer _Peer;
 
 
         /// <summary>
-        /// Stores information about the client that created this communications node
+        /// This is the communication channel used to send messages from the client
         /// </summary>
-        private Object _Client;
+        ICommDuplexChannel _ClientChannel = null;
+
+        /// <summary>
+        /// This does all the work of generating the proxies for communication
+        /// </summary>
+        DuplexChannelFactory<ICommDuplexChannel> _ChannelFactory;
 
         /// <summary>
         /// 
@@ -36,7 +64,7 @@ namespace cir.PeerComm
         private NetPeerTcpBinding _CommBinding = new NetPeerTcpBinding();
 
         /// <summary>
-        /// If the client is online or not.
+        /// If the Peer is online or not.
         /// </summary>
         private bool _Online;
 
@@ -66,102 +94,97 @@ namespace cir.PeerComm
         /// <summary>
         /// Create a new instance of the CommNode class with no security
         /// </summary>
-        /// <param name="Client"></param>
-        public CommNode(Object Client)
+        /// <param name="Peer"></param>
+        public CommChannel(IPeer Peer)
         {
-            initialize(Client, null);
+            initialize(Peer, null);
         }
 
         /// <summary>
-        /// Create a new instance of the CommNode class with no security
+        /// Create a new instance of the CommNode class with security
         /// </summary>
-        /// <param name="Client"></param>
-        public CommNode(Object Client, string ChannelName, string ChannelPassword, X509Certificate2 ChannelCert)
+        /// <param name="Peer"></param>
+        public CommChannel(IPeer Peer, string ChannelName, string ChannelPassword, X509Certificate2 ChannelCert)
         {
-            //initialize(Client, null);
+            //initialize(Peer, null);
         }
 
 
         /// <summary>
-        /// Create a new instance of the CommNode class 
+        /// Create a new instance of the CommNode class using a custom peer resolver instead of PNRP
         /// </summary>
-        /// <param name="Client"></param>
-        public CommNode(Object Client, bool UseCustomePeerResolver)
+        /// <param name="Peer"></param>
+        public CommChannel(IPeer Peer, bool UseCustomePeerResolver)
         {
-            initialize(Client, null);
+            //initialize(Peer, null);
         }
 
 
-        private void initialize(Object Client, CustomPeerResolver Resolver)
+        private void initialize(IPeer Peer, CustomPeerResolver Resolver)
         {
-            _Client = Client;
+            _Peer = Peer;
 
             //buildCommBinding
 
-            // Handles messages on the callback interface
+            // This creates the references for other clients to call this client's IComm methods
             InstanceContext instanceContext = new InstanceContext(this);
 
-            // Create a channel factory to do all the work of creating the proxy for this class
-            DuplexChannelFactory<ICommDuplexChannel> factory = new DuplexChannelFactory<ICommDuplexChannel>(instanceContext, _CommBinding, "net.p2p://cirCommMesh/PeerComm");
+            // The channel factory will do all the work of creating the proxy for this class so we don't have to
+            _ChannelFactory = new DuplexChannelFactory<ICommDuplexChannel>(instanceContext, _CommBinding, "net.p2p://cirCommMesh/PeerComm");
 
-            // Retrieve the PeerNode associated with the participant and register for online/offline events
-            ICommDuplexChannel participant = factory.CreateChannel();
+            // Retrieve the peer node associated with the participant and register for online/offline events
+            _ClientChannel = _ChannelFactory.CreateChannel();
 
-            // Register this client node with the online and offline events
-            IOnlineStatus ostat = participant.GetProperty<IOnlineStatus>();
+            // Register this peer node with the online and offline events
+            IOnlineStatus ostat = _ClientChannel.GetProperty<IOnlineStatus>();
             ostat.Online += new EventHandler(OnOnline);
             ostat.Offline += new EventHandler(OnOffline);
-            
 
             try
             {
-                participant.Open();
+                _ClientChannel.Open();
             }
             catch (CommunicationException ce)
             {
-                Debug.WriteLine(ce.ToString());
-                Console.WriteLine(ce.ToString());
-                Console.WriteLine("Could not find resolver.  If you are using a custom resolver, please ensure");
-                Console.WriteLine("that the service is running before executing this sample.  Refer to the readme");
-                Console.WriteLine("for more details.");
-                Console.ReadLine();
-                return;
+                throw new Exception("Could not connect to resolver service.", ce);
             }
-
-
-            Console.WriteLine("{0} is ready", Client);
-            Console.WriteLine("Type chat messages after going Online");
-            Console.WriteLine("Press q<ENTER> to terminate this instance.");
 
             // Announce self to other participants
-            participant.Connect(Client);
-
-            // loop until the user quits
-            while (true)
-            {
-                string line = Console.ReadLine();
-                if (line == "q") break;
-                participant.SendMessage(Client, line);
-            }
-            // Leave the mesh
-            participant.Disconnect(Client);
-            participant.Close();
-            factory.Close();
+            _ClientChannel.Connect(Peer);
 
         }
 
        
-        public void SendMessage(Object Client, Object Message)
+        /// <summary>
+        /// Send a message to 
+        /// </summary>
+        /// <param name="Peer"></param>
+        /// <param name="Message"></param>
+        public void SendMessage(IPeer Peer, IMessage Message)
+        {
+            // Check to see if we're sending a message or we just received a message
+            if (Peer.ID == _Peer.ID)
+            { }
+            else
+            { }
+        }
+ 
+        public void SendMessage(IPeer PeerFrom, IPeer PeerTo, IMessage Message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Connect(IPeer Peer)
         {
 
         }
 
-        public void Connect(Object Client)
+        public void Disconnect(IPeer Peer)
         {
-        }
-
-        public void Disconnect(Object Client)
-        {
+            // Leave the mesh
+            _ClientChannel.Disconnect(Peer);
+            _ClientChannel.Close();
+            _ChannelFactory.Close();
 
         }
 
@@ -176,14 +199,6 @@ namespace cir.PeerComm
             Console.WriteLine("**  Offline");
         }
 
-        #region IComm<Object,Object> Members
 
-
-        public void SendMessage(Object ClientFrom, Object ToNode, Object Message)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

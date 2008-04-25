@@ -12,7 +12,7 @@ namespace cir.PeerComm
 {
     /// <summary>
     /// Serves as a wrapper for the IComm interface allowing it to 
-    /// be used for two-way communication via an IClientChannel
+    /// be used for two-way communication via an IPeerChannel
     /// </summary>
     public interface ICommDuplexChannel : IComm, IClientChannel
     {}
