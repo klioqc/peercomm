@@ -2,11 +2,12 @@ F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\obj\Debug
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\obj\Debug\cir.PeerComm.ClientExample.Form1.resources
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\obj\Debug\cir.PeerComm.ClientExample.Properties.Resources.resources
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\obj\Debug\cir.PeerComm.ClientExample.csproj.GenerateResource.Cache
-F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\Assembly\makecert.exe
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\cir.PeerComm.ClientExample.exe
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\cir.PeerComm.ClientExample.pdb
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\cir.PeerComm.dll
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\cir.PeerComm.pdb
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\obj\Debug\cir.PeerComm.ClientExample.exe
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\obj\Debug\cir.PeerComm.ClientExample.pdb
-F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\Assembly\pvk2pfx.exe
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\Org.Mentalis.Security.Tools.dll
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\Org.Mentalis.Security.Tools.xml
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\Org.Mentalis.Security.Tools.pdb

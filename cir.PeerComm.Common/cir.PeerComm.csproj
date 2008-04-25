@@ -43,6 +43,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -57,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
-    <Compile Include="MathUtils.cs" />
     <Compile Include="Security\Certificate.cs" />
     <Compile Include="CommChannel.cs" />
     <Compile Include="CustomPeerResolver.cs" />
@@ -80,7 +80,6 @@
     <Compile Include="Security\DigitalSignature.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assembly\MakeCert.bat" />
     <None Include="Properties\app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -88,19 +87,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assembly\makecert.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assembly\pvk2pfx.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assembly\Org.Mentalis.Security.Tools.dll" />
+    <Content Include="Assembly\Org.Mentalis.Security.Tools.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\SecurityTools-1.0.0\Org.Mentalis.Security.Tools\Org.Mentalis.Security.Tools.csproj">
+      <Project>{1A859AC2-EA46-461B-AFDE-D9CCD7F44508}</Project>
+      <Name>Org.Mentalis.Security.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Test\" />
