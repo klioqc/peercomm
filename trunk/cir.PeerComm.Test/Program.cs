@@ -5,6 +5,8 @@ using System.Text;
 
 using System.Security;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+
 
 using System.Diagnostics;
 
@@ -47,8 +49,7 @@ namespace cir.PeerComm.Test
         {
             // Create a test keypair with a strong keysize of 2048 bits. In a production application 
             // we would load this value from a DPAPI protected registry value
-            RSACryptoServiceProvider rsaProvider = new RSACryptoServiceProvider(2048);
-
+            RSACryptoServiceProvider rsaProvider = new RSACryptoServiceProvider(384);
             
             // The ExportParameters method below takes a boolean, which determines whether
             // to export the private key data within the parameters. When exporting parameters
@@ -61,17 +62,12 @@ namespace cir.PeerComm.Test
 			//Create a UnicodeEncoder to convert between byte array and string.
 			//UnicodeEncoding byteConverter = new UnicodeEncoding();
 
-            //Debug
-            for (int i = 0; i < 1; i++)
-            {
-                rsaProvider = new RSACryptoServiceProvider(64);
-                rsaPubKeyParams = rsaProvider.ExportParameters(false);
-                rsaPrivKeyParams = rsaProvider.ExportParameters(true);
-
-                Debug.WriteLine("Public: " + cir.MathUtils.Hex(rsaPubKeyParams.Modulus, " "));
-                Debug.WriteLine("Private: " + cir.MathUtils.Hex(rsaPrivKeyParams.D, " "));
+            for (int i = 0; i < 10000; i++)
+            { 
+                
             }
 
+            
             string message1 = "the quick brown fox jumped over the lazy dog";
             string message2 = "the quick brown dog jumped over the lazy fox";
 
@@ -100,6 +96,8 @@ namespace cir.PeerComm.Test
             {
                 Console.Out.WriteLine("Invalid signature.");
             }
+
+            Console.ReadLine();
         }
 
     }

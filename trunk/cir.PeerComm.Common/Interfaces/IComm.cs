@@ -41,23 +41,17 @@ namespace cir.PeerComm
         void Disconnect(IPeer Peer);
 
         /// <summary>
-        /// Peer sends a message to all of the other peers on the network.
-        /// </summary>
-        /// <param name="PeerFrom"></param>
-        /// <param name="Message"></param>
-        [OperationContract(IsOneWay = true)]
-        void SendMessage(IPeer PeerFrom, IMessage Message);
-
-        /// <summary>
-        /// Sends a message to a specific peer on the network.
-        /// In reality is still sends the message to all the nodes 
-        /// but only the appropriate node will receive a message event.
+        /// Broadcasts a message to all peers on the network
+        /// 
+        /// You can specify a message is intended for only one recipient
+        /// but all members will still receive the message so be aware
+        /// this is NOT a secure method of sending a message.
         /// </summary>
         /// <param name="PeerFrom"></param>
         /// <param name="ToNode"></param>
         /// <param name="Message"></param>
         [OperationContract(IsOneWay = true)]
-        void SendMessage(IPeer PeerFrom, IPeer PeerTo, IMessage Message);
+        void SendMessage(IMessage Message, byte[] MessageSignature);
     }
 
 }

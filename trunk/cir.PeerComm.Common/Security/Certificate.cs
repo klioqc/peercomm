@@ -10,67 +10,69 @@ using System.Threading;
 
 using System.Diagnostics;
 using System.IO;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
+
 
 namespace cir.PeerComm.Security
 {
     /// <summary>
     /// This class provides methods for loading and generating certificates
+    /// If you don't tell the class a cert name it assumes you are dealing
+    /// with the peer network's mesh certificate.
     /// </summary>
     public class Certificate
     {
+        private const string _FileName = ".\\Assembly\\MeshCert.cer";
 
-        public enum KeyTypes
-        { 
-            exchange = 1,
-            signature = 2
+        private X509Certificate2 _Cert;
+
+        public X509Certificate2 Cert
+        {
+            get
+            {
+                // Try to load the cert, if it doesn't exist create it
+                if (_Cert == null)
+                {
+                    _Cert = LoadCert(_FileName);
+                    if (_Cert == null)
+                    { CreateAndSave(); }
+                }
+
+                return _Cert;
+            }
         }
 
         /// <summary>
-        /// Creates an X509 Certificate that is self-signed.
+        /// The purpose of this class is really just to 
+        /// create a certificate once and save it
+        /// so this does all that work for you.
+        /// </summary>
+        public void CreateAndSave()
+        {
+            _Cert = CreateCertificate(Guid.NewGuid().ToString());
+            SaveCert(_Cert, _FileName);
+        }
+
+        /// <summary>
+        /// Create a self-signed certificate
         /// </summary>
         /// <param name="CompanyName"></param>
-        /// <param name="FileName"></param>
         /// <returns></returns>
-        public static bool CreateCertificate(string CompanyName, string FileName, KeyTypes KeyType, string Password)
+        public X509Certificate2 CreateCertificate(string CompanyName)
         {
+            DigitalSignature sig = new DigitalSignature(2048);
 
-            
-            // Build the file name and command line parameters
-            string makeCertExe = Directory.GetCurrentDirectory() + "\\assembly\\makecert.exe";
-            string pvk2pfxExe = Directory.GetCurrentDirectory() + "\\assembly\\pvk2pfx.exe";
+            Org.Mentalis.Security.Tools.CertificateSettings certSettings = new Org.Mentalis.Security.Tools.CertificateSettings();
+            certSettings.EndDate = DateTime.Now.AddYears(10);
 
-            string commandLine = "-r -n \"CN=" + CompanyName + "\" -sv " + FileName + ".pvk -sky " + KeyType.ToString() + " " + FileName + ".cer";
+            // Why they don't wrap the company name for you is beyond me.  Dumb, just plain dumb.
+            string companyName = "CN={" + CompanyName.Replace(",", " ") +"}";
+            X509Certificate cert = Org.Mentalis.Security.Tools.X509CertificateGenerator.Create(sig.CryptoProvider, companyName , certSettings);
+           
+            return new X509Certificate2(cert);
 
-            // Generate the certificate and private key files
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.Arguments = commandLine;
-            startInfo.FileName = makeCertExe;
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-
-            Process shell = Process.Start(startInfo);
-            shell.WaitForExit();
-
-            // Convert the cert and private key files to an all in one pfx file
-            commandLine = "-pvk " + FileName + ".pvk -scp " + FileName + ".cer -po " + Password + " -pfx " + FileName + ".pfx";
-
-            startInfo = new ProcessStartInfo();
-            startInfo.Arguments = commandLine;
-            startInfo.FileName = pvk2pfxExe;
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-
-            shell = Process.Start(startInfo);
-            shell.WaitForExit();
-
-            File.Delete(FileName + ".cer");
-
-            File.Delete(FileName + ".pvk");
-
-            // Check for an error
-            if (shell.ExitCode == -1)
-            { return false; }
-
-            return true;
         }
 
         /// <summary>
@@ -78,7 +80,24 @@ namespace cir.PeerComm.Security
         /// </summary>
         /// <param name="FileName"></param>
         /// <returns></returns>
-        public static X509Certificate2 ReadCert(string FileName)
+        public void SaveCert(X509Certificate2 Cert, string FileName)
+        {
+            try
+            {
+                File.WriteAllBytes(FileName, Cert.RawData);
+            }
+            catch { }
+
+            return;
+        }
+
+
+        /// <summary>
+        /// Read in a certificate
+        /// </summary>
+        /// <param name="FileName"></param>
+        /// <returns></returns>
+        public X509Certificate2 LoadCert(string FileName)
         {
             // Read in the certificate
             X509Certificate2 cert = null;
@@ -97,7 +116,7 @@ namespace cir.PeerComm.Security
         /// Not used but I wanted to learn how to do it so kept the code.
         /// </summary>
         /// <param name="CertFileName"></param>
-        public static void createCertSatelliteDLL(string CertFileName, byte[] SecurityCert)
+        public void createCertSatelliteDLL(string CertFileName, byte[] SecurityCert)
         {
             
             string assemblyFileName = "cir.PeerComm.Cert.dll";

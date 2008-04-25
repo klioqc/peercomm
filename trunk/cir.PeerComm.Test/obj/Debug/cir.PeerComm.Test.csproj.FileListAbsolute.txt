@@ -3,7 +3,8 @@ F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\cir.Peer
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\cir.PeerComm.Test.pdb
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\obj\Debug\cir.PeerComm.Test.exe
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\obj\Debug\cir.PeerComm.Test.pdb
-F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\Assembly\makecert.exe
-F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\Assembly\pvk2pfx.exe
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\cir.PeerComm.dll
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\cir.PeerComm.pdb
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\Org.Mentalis.Security.Tools.dll
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\Org.Mentalis.Security.Tools.xml
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\Org.Mentalis.Security.Tools.pdb

@@ -160,19 +160,10 @@ namespace cir.PeerComm
         /// </summary>
         /// <param name="Peer"></param>
         /// <param name="Message"></param>
-        public void SendMessage(IPeer Peer, IMessage Message)
+        public void SendMessage(IMessage Message, byte[] MessageSignature)
         {
-            // Check to see if we're sending a message or we just received a message
-            if (Peer.ID == _Peer.ID)
-            { }
-            else
-            { }
         }
  
-        public void SendMessage(IPeer PeerFrom, IPeer PeerTo, IMessage Message)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Connect(IPeer Peer)
         {

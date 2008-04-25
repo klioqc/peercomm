@@ -22,13 +22,23 @@ namespace cir.PeerComm.ClientExample
 
         private void _MakeCert_Click(object sender, EventArgs e)
         {
-            bool certMade = cir.PeerComm.Security.Certificate.CreateCertificate("FiveInchFish", "fif", cir.PeerComm.Security.Certificate.KeyTypes.exchange,"BlahBlahBlah");
-            X509Certificate2 cert = cir.PeerComm.Security.Certificate.ReadCert("fif.pfx");
-
-            if (cert != null)
-            { 
-                Debug.WriteLine(cert.ToString());
-                Debug.WriteLine(cert.PrivateKey.ToString());
+            //bool certMade = cir.PeerComm.Security.Certificate.CreateCertificate("FiveInchFish", "fif", cir.PeerComm.Security.Certificate.KeyTypes.exchange,"BlahBlahBlah");
+            //X509Certificate2 cert = cir.PeerComm.Security.Certificate.ReadCert("fif.pfx");
+            Debug.WriteLine("");
+            Debug.WriteLine("");
+            Debug.WriteLine("");
+            try
+            {
+                X509Certificate2 cert = cir.PeerComm.Security.Certificate.CreateCertificate(_CompanyName.Text); // ("Five Inch Fish, Inc.");
+                if (cert != null)
+                {
+                    Debug.WriteLine(cert.ToString());
+                    Debug.WriteLine(cert.PrivateKey.ToString());
+                }
+            }
+            catch (Exception x)
+            {
+                Debug.WriteLine(x.ToString());
             }
         }
 

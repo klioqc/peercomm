@@ -1,10 +1,11 @@
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\obj\Debug\ResolveAssemblyReference.cache
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\obj\Debug\cir.PeerComm.Properties.Resources.resources
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\obj\Debug\cir.PeerComm.csproj.GenerateResource.Cache
-F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\bin\Debug\Assembly\makecert.exe
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\bin\Debug\cir.PeerComm.dll.config
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\bin\Debug\cir.PeerComm.dll
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\bin\Debug\cir.PeerComm.pdb
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\obj\Debug\cir.PeerComm.dll
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\obj\Debug\cir.PeerComm.pdb
-F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\bin\Debug\Assembly\pvk2pfx.exe
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\bin\Debug\Org.Mentalis.Security.Tools.dll
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\bin\Debug\Org.Mentalis.Security.Tools.xml
+F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Common\bin\Debug\Org.Mentalis.Security.Tools.pdb
