@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="MathUtils.cs" />
     <Compile Include="Security\Certificate.cs" />
     <Compile Include="CommChannel.cs" />
     <Compile Include="CustomPeerResolver.cs" />
