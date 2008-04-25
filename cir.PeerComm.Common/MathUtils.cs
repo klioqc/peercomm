@@ -581,7 +581,7 @@ namespace cir
 
 
         /// <summary>
-        /// Convert a real DateTime to an Oracle formated datetime, this only works if you set your Oracle session to the format used in this function
+        /// Convert a real DateTime to an Oracle formated datetime
         /// </summary>
         /// <param name="RealDate"></param>
         /// <returns></returns>
@@ -596,10 +596,10 @@ namespace cir
         /// </summary>
         /// <param name="time_t">Unix/Posix Time Value</param>
         /// <returns>Dot.Net DateTime Value</returns>
-        public static DateTime ConvertFromTime_T(ulong time_t)
+        public static DateTime ConvertFromTime_T(ulong Time_T)
         {
             // Do NOT use ToLocalTime() because it ISN'T local time it's GMT!!!!!!
-            DateTime netTimeT = new DateTime(1970, 1, 1).AddSeconds(time_t);
+            DateTime netTimeT = new DateTime(1970, 1, 1).AddSeconds(Time_T);
             return netTimeT;
         }
 
@@ -808,7 +808,7 @@ namespace cir
         }
 
         /// <summary>
-        /// Turns a base 10 number into a base Base number
+        /// Turns a base 10 number into a base N number
         /// </summary>
         /// <param name="Value"></param>
         /// <param name="Base"></param>
@@ -835,7 +835,7 @@ namespace cir
         }
 
         /// <summary>
-        /// Turns a base Base number into a base 10 number
+        /// Turns a base N number into a base 10 number
         /// </summary>
         /// <param name="Value"></param>
         /// <param name="Base"></param>

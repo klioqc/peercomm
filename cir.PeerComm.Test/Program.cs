@@ -68,8 +68,8 @@ namespace cir.PeerComm.Test
                 rsaPubKeyParams = rsaProvider.ExportParameters(false);
                 rsaPrivKeyParams = rsaProvider.ExportParameters(true);
 
-                Debug.WriteLine("Public: " + ea.MathUtils.Hex(rsaPubKeyParams.Modulus, " "));
-                Debug.WriteLine("Private: " + ea.MathUtils.Hex(rsaPrivKeyParams.D, " "));
+                Debug.WriteLine("Public: " + cir.MathUtils.Hex(rsaPubKeyParams.Modulus, " "));
+                Debug.WriteLine("Private: " + cir.MathUtils.Hex(rsaPrivKeyParams.D, " "));
             }
 
             string message1 = "the quick brown fox jumped over the lazy dog";
