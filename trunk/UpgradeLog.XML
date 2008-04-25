@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="cir.PeerComm">
+</Property><Property Name="Solution File" Value="F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.sln">
+</Property><Property Name="Date" Value="Thursday, April 24, 2008">
+</Property><Property Name="Time" Value="12:54:03 PM">
+</Property></Properties><Event ErrorLevel="0" Project="ea.MathUtils" Source="..\..\ea\ea.Math\ea.MathUtils.csproj" Description="Project file successfully backed up as F:\Projects\00 Development\cir\cir.PeerComm\Backup\ea.MathUtils.csproj">
+</Event><Event ErrorLevel="0" Project="ea.MathUtils" Source="..\..\ea\ea.Math\MathUtils.cs" Description="File successfully backed up as F:\Projects\00 Development\cir\cir.PeerComm\Backup\MathUtils.cs">
+</Event><Event ErrorLevel="0" Project="ea.MathUtils" Source="..\..\ea\ea.Math\Properties\AssemblyInfo.cs" Description="File successfully backed up as F:\Projects\00 Development\cir\cir.PeerComm\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="ea.MathUtils" Source="..\..\ea\ea.Math\ea.MathUtils.pfx" Description="File successfully backed up as F:\Projects\00 Development\cir\cir.PeerComm\Backup\ea.MathUtils.pfx">
+</Event><Event ErrorLevel="0" Project="ea.MathUtils" Source="..\..\ea\ea.Math\keys.ico" Description="File successfully backed up as F:\Projects\00 Development\cir\cir.PeerComm\Backup\keys.ico">
+</Event><Event ErrorLevel="0" Project="ea.MathUtils" Source="..\..\ea\ea.Math\ea.MathUtils.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ea.MathUtils" Source="..\..\ea\ea.Math\ea.MathUtils.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="ea.MathUtils" Source="..\..\ea\ea.Math\ea.MathUtils.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
