@@ -24,45 +24,54 @@ namespace cir.PeerComm.Security
     /// </summary>
     public class Certificate
     {
-        private const string _FileName = ".\\Assembly\\MeshCert.cer";
+        private const string _MeshCertFileName = ".\\Assembly\\MeshCert.cer";
+        private const int _DefaultKeySize = 1024;
 
-        private X509Certificate2 _Cert;
+        private static X509Certificate2 _Cert;
 
-        public X509Certificate2 Cert
+        /// <summary>
+        /// This certificate is used by the default mesh channel.
+        /// If you want to make multiple channels you'll just need to 
+        /// keep track of the cert yourself.  This is really just for
+        /// convenience in a one mesh enviroment.
+        /// </summary>
+        public static X509Certificate2 MeshCertificate
         {
             get
             {
                 // Try to load the cert, if it doesn't exist create it
                 if (_Cert == null)
                 {
-                    _Cert = LoadCert(_FileName);
+                    _Cert = LoadCert(_MeshCertFileName);
                     if (_Cert == null)
-                    { CreateAndSave(); }
+                    { CreateAndSave(_MeshCertFileName, _DefaultKeySize); }
                 }
 
                 return _Cert;
             }
         }
 
+
         /// <summary>
-        /// The purpose of this class is really just to 
-        /// create a certificate once and save it
-        /// so this does all that work for you.
+        /// Create and save a self-signed certificate.
         /// </summary>
-        public void CreateAndSave()
+        /// <param name="FileName"></param>
+        /// <param name="KeySize"></param>
+        public static void CreateAndSave(string FileName, int KeySize)
         {
-            _Cert = CreateCertificate(Guid.NewGuid().ToString());
-            SaveCert(_Cert, _FileName);
+            _Cert = CreateCertificate(Guid.NewGuid().ToString(), KeySize);
+            SaveCert(_Cert, FileName);
         }
 
         /// <summary>
-        /// Create a self-signed certificate
+        /// Make a new self-signed certificate using the given keysize.
         /// </summary>
         /// <param name="CompanyName"></param>
+        /// <param name="KeySize"></param>
         /// <returns></returns>
-        public X509Certificate2 CreateCertificate(string CompanyName)
+        public static X509Certificate2 CreateCertificate(string CompanyName, int KeySize)
         {
-            DigitalSignature sig = new DigitalSignature(2048);
+            DigitalSignature sig = new DigitalSignature(KeySize);
 
             Org.Mentalis.Security.Tools.CertificateSettings certSettings = new Org.Mentalis.Security.Tools.CertificateSettings();
             certSettings.EndDate = DateTime.Now.AddYears(10);
@@ -76,11 +85,11 @@ namespace cir.PeerComm.Security
         }
 
         /// <summary>
-        /// Read in a certificate
+        /// Save a certificate object to file
         /// </summary>
+        /// <param name="Cert"></param>
         /// <param name="FileName"></param>
-        /// <returns></returns>
-        public void SaveCert(X509Certificate2 Cert, string FileName)
+        public static void SaveCert(X509Certificate2 Cert, string FileName)
         {
             try
             {
@@ -97,17 +106,20 @@ namespace cir.PeerComm.Security
         /// </summary>
         /// <param name="FileName"></param>
         /// <returns></returns>
-        public X509Certificate2 LoadCert(string FileName)
+        public static X509Certificate2 LoadCert(string FileName)
         {
             // Read in the certificate
             X509Certificate2 cert = null;
-            try
-            {
-                byte[] rawCert = File.ReadAllBytes(FileName);
-                cert = new X509Certificate2(rawCert);
-            }
-            catch { }
 
+            if (File.Exists(FileName))
+            {
+                try
+                {
+                    byte[] rawCert = File.ReadAllBytes(FileName);
+                    cert = new X509Certificate2(rawCert);
+                }
+                catch { }
+            }
             return cert;
         }
 
@@ -116,7 +128,7 @@ namespace cir.PeerComm.Security
         /// Not used but I wanted to learn how to do it so kept the code.
         /// </summary>
         /// <param name="CertFileName"></param>
-        public void createCertSatelliteDLL(string CertFileName, byte[] SecurityCert)
+        private void createCertSatelliteDLL(string CertFileName, byte[] SecurityCert)
         {
             
             string assemblyFileName = "cir.PeerComm.Cert.dll";

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cir.PeerComm.ClientExample"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cir.PeerComm.Test", "cir.PeerComm.Test\cir.PeerComm.Test.csproj", "{3BE01363-16FB-46A8-85F4-1C73F33E076F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Org.Mentalis.Security.Tools", "..\..\SecurityTools-1.0.0\Org.Mentalis.Security.Tools\Org.Mentalis.Security.Tools.csproj", "{1A859AC2-EA46-461B-AFDE-D9CCD7F44508}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,10 +25,6 @@ Global
 		{3BE01363-16FB-46A8-85F4-1C73F33E076F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BE01363-16FB-46A8-85F4-1C73F33E076F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BE01363-16FB-46A8-85F4-1C73F33E076F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A859AC2-EA46-461B-AFDE-D9CCD7F44508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A859AC2-EA46-461B-AFDE-D9CCD7F44508}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A859AC2-EA46-461B-AFDE-D9CCD7F44508}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A859AC2-EA46-461B-AFDE-D9CCD7F44508}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

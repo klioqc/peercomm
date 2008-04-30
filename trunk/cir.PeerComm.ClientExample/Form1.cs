@@ -29,7 +29,7 @@ namespace cir.PeerComm.ClientExample
             Debug.WriteLine("");
             try
             {
-                X509Certificate2 cert = cir.PeerComm.Security.Certificate.CreateCertificate(_CompanyName.Text); // ("Five Inch Fish, Inc.");
+                X509Certificate2 cert = cir.PeerComm.Security.Certificate.CreateCertificate(_CompanyName.Text,1024); // ("Five Inch Fish, Inc.");
                 if (cert != null)
                 {
                     Debug.WriteLine(cert.ToString());

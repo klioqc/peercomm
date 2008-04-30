@@ -15,7 +15,7 @@ namespace cir.PeerComm
     /// <summary>
     /// Describes what can be done by the peer nodes that connect to the service.
     /// 
-    /// Note: I really wanted to use generics with this for the Peer and Message types
+    /// Note: I really wanted to use generics with this for the Peer and Msg types
     ///       but you can't use generics in a service contract declaration. Because of this
     ///       you have to declare the types somewhere and that negates the purpose of generics.
     /// </summary>
@@ -29,7 +29,7 @@ namespace cir.PeerComm
         /// </summary>
         /// <param name="Peer"></param>
         [OperationContract(IsOneWay = true)]
-        void Connect(IPeer Peer);
+        void Connect(PeerNode Peer);
 
          /// <summary>
         /// Peer disconnects from the peer mesh.
@@ -38,7 +38,7 @@ namespace cir.PeerComm
         /// </summary>
         /// <param name="Peer"></param>
         [OperationContract(IsOneWay = true)]
-        void Disconnect(IPeer Peer);
+        void Disconnect(PeerNode Peer);
 
         /// <summary>
         /// Broadcasts a message to all peers on the network
@@ -49,9 +49,9 @@ namespace cir.PeerComm
         /// </summary>
         /// <param name="PeerFrom"></param>
         /// <param name="ToNode"></param>
-        /// <param name="Message"></param>
+        /// <param name="Msg"></param>
         [OperationContract(IsOneWay = true)]
-        void SendMessage(IMessage Message, byte[] MessageSignature);
+        void SendMessage(Message Msg, byte[] MessageSignature);
     }
 
 }
