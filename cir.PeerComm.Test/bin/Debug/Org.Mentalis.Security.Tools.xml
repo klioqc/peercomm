@@ -4,10 +4,200 @@
         <name>Org.Mentalis.Security.Tools</name>
     </assembly>
     <members>
-        <member name="T:Org.Mentalis.Security.Tools.CryptoProviderHandle">
+        <member name="T:Org.Mentalis.Security.Tools.StrongNameFile">
             <summary>
-            Encapsulates a CSP handle.
+            Represents a Strong Name file (also known as an SNK file).
             </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.Security.Cryptography.RSA)">
+            <summary>
+            Initializes a new instance of the StrongNameFile class.
+            </summary>
+            <param name="rsa">The private key that this strong name file represents.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="rsa"/> is a null reference.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.Security.Cryptography.RSAParameters)">
+            <summary>
+            Initializes a new instance of the StrongNameFile class.
+            </summary>
+            <param name="rsa">The private key that this strong name file represents.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="rsa"/> contains invalid data.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the StrongNameFile class.
+            </summary>
+            <param name="file">The path to the SNK file to open.</param>
+            <exception cref="T:System.IO.FileNotFoundException">The file cannot be found.</exception>
+            <exception cref="T:System.IO.InvalidDataException">The file contains invalid data.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.IO.FileInfo)">
+            <summary>
+            Initializes a new instance of the StrongNameFile class.
+            </summary>
+            <param name="file">The SNK file to open.</param>
+            <exception cref="T:System.IO.FileNotFoundException">The file cannot be found.</exception>
+            <exception cref="T:System.IO.InvalidDataException">The file contains invalid data.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Save(System.String)">
+            <summary>
+            Saves this StrongNameFile instance to disk in the SNK file format.
+            </summary>
+            <param name="fileName">The filename to save to.</param>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+            <exception cref="T:System.NotSupportedException">The data cannot be exported.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="fileName"/> is a null reference.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Save(System.String,System.Boolean)">
+            <summary>
+            Saves this StrongNameFile instance to disk in the SNK file format.
+            </summary>
+            <param name="fileName">The filename to save to.</param>
+            <param name="includePrivateKey"><b>true</b> if the private key must be included, <b>false</b> otherwise.</param>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+            <exception cref="T:System.NotSupportedException">The private key is not available or the data cannot be exported.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="fileName"/> is a null reference.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Dispose">
+            <summary>
+            Releases all managed and unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Finalize">
+            <summary>
+            Releases all managed and unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.StrongNameFile.HasPrivateKey">
+            <summary>
+            Gets a value that indicates whether the SNK file contains a private key or not.
+            </summary>
+            <value><b>true</b> if the file contains a private key, <b>false</b> otherwise.</value>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.StrongNameFile.PublicKey">
+            <summary>
+            Gets an <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the public key.
+            </summary>
+            <value>An <see cref="T:System.Security.Cryptography.RSA"/> instance.</value>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+        </member>
+        <member name="P:Org.Mentalis.Security.Tools.StrongNameFile.PrivateKey">
+            <summary>
+            Gets an <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the public/private key pair.
+            </summary>
+            <value>An <see cref="T:System.Security.Cryptography.RSA"/> instance.</value>
+            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
+            <exception cref="T:System.NotSupportedException">The private key is not available.</exception>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.X509CertificateGenerator">
+            <summary>
+            Generates self-signed X509 certificates.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.X509CertificateGenerator.Create(System.Security.Cryptography.RSACryptoServiceProvider,System.String)">
+            <summary>
+            Creates and returns a self-signed X509 certificate.
+            </summary>
+            <param name="key">The key of the certificate.</param>
+            <param name="issuerName">The encoded common name of the issuer.</param>
+            <returns>An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance.</returns>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while creating the self-signed certificate.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.X509CertificateGenerator.Create(System.Security.Cryptography.RSACryptoServiceProvider,System.String,Org.Mentalis.Security.Tools.CertificateSettings)">
+            <summary>
+            Creates and returns a self-signed X509 certificate.
+            </summary>
+            <param name="key">The key of the certificate.</param>
+            <param name="issuerName">The encoded common name of the issuer.</param>
+            <param name="settings">The settings of the X509 certificate.</param>
+            <returns>An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance.</returns>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while creating the self-signed certificate.</exception>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.PrivateKeyFile">
+            <summary>
+            The PrivateKeyFile class represents a Private Key file (also known as a PVK
+            file). It can load PVK files and associate them with their corresponding
+            X509 certificates.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.#ctor(System.String)">
+            <summary>
+            Initializes a new PrivateKeyFile instance.
+            </summary>
+            <param name="pvkFile">The file to load.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="pvkFile"/> is a null reference -or- a password is required.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">The specified file could not be found.</exception>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while decrypting the file.</exception>
+            <exception cref="T:System.IO.InvalidDataException">The file is invalid.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new PrivateKeyFile instance.
+            </summary>
+            <param name="pvkFile">The file to load.</param>
+            <param name="password">The password, if any.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="pvkFile"/> is a null reference -or- a password is required and <paramref name="password"/> is a null reference.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">The specified file could not be found.</exception>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while decrypting the file.</exception>
+            <exception cref="T:System.IO.InvalidDataException">The file is invalid.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.AssociateWith(System.Security.Cryptography.X509Certificates.X509Certificate)">
+            <summary>
+            Associates this private key instance with the corresponding X509 certificate.
+            </summary>
+            <param name="certificate">An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance to associate the key with.</param>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while associating the private key with the certificate.</exception>
+            <remarks>The key will be imported as an exportable key.</remarks>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.AssociateWith(System.Security.Cryptography.X509Certificates.X509Certificate,System.Boolean)">
+            <summary>
+            Associates this private key instance with the corresponding X509 certificate.
+            </summary>
+            <param name="certificate">An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance to associate the key with.</param>
+            <param name="exportable"><b>true</b> if the key should be marked as exportable, <b>false</b> otherwise.</param>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while associating the private key with the certificate.</exception>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.Dispose">
+            <summary>
+            Releases all managed and unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.Finalize">
+            <summary>
+            Releases all managed and unmanaged resources.
+            </summary>
+        </member>
+        <member name="T:Org.Mentalis.Security.Tools.RSAExponentOfOne">
+            <summary>
+            The RSAExponentOfOne class generates so-called 'exponent-of-one' RSA keys. These keys are
+            special RSA keys, in the sense that the output buffer matches the input buffer for an
+            RSA encryption or decryption. Practically, this means that if you generate a key-exchange
+            message using a RSAPKCS1KeyExchangeFormatter class that was initialized with such a special
+            key, the resulting key exchange buffer will include the secret key unencrypted.
+            Exponent-of-one keys are very useful when you're in the debugging stage of your application.
+            You can use these keys instead of 'normal' RSA keys, and the entire system keeps working
+            as expected. The only difference is that the 'encrypted' data is the same as the unencrypted
+            data - a very useful feature for debugging purposes.
+            </summary>
+            <remarks>
+            Exponent-of-one keys should <b>never</b> be used in production! They do not offer any
+            security whatsoever.
+            </remarks>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.RSAExponentOfOne.Create">
+            <summary>
+            Creates a new exponent-of-one key.
+            </summary>
+            <returns>An <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the exponen-of-one key.</returns>
+            <remarks>The modulus length of this key will be 1024 bits.</remarks>
+        </member>
+        <member name="M:Org.Mentalis.Security.Tools.RSAExponentOfOne.Create(System.Int32)">
+            <summary>
+            Creates a new exponent-of-one key.
+            </summary>
+            <param name="bitLength">The length of the modulus, in bits.</param>
+            <returns>An <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the exponen-of-one key.</returns>
         </member>
         <member name="T:Org.Mentalis.Security.Tools.ARCFourManagedTransform">
             <summary>
@@ -115,91 +305,10 @@
             </summary>
             <value>This property returns 1.</value>
         </member>
-        <member name="T:Org.Mentalis.Security.Tools.StrongNameFile">
+        <member name="T:Org.Mentalis.Security.Tools.CryptoProviderHandle">
             <summary>
-            Represents a Strong Name file (also known as an SNK file).
+            Encapsulates a CSP handle.
             </summary>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.Security.Cryptography.RSA)">
-            <summary>
-            Initializes a new instance of the StrongNameFile class.
-            </summary>
-            <param name="rsa">The private key that this strong name file represents.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="rsa"/> is a null reference.</exception>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.Security.Cryptography.RSAParameters)">
-            <summary>
-            Initializes a new instance of the StrongNameFile class.
-            </summary>
-            <param name="rsa">The private key that this strong name file represents.</param>
-            <exception cref="T:System.ArgumentException"><paramref name="rsa"/> contains invalid data.</exception>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the StrongNameFile class.
-            </summary>
-            <param name="file">The path to the SNK file to open.</param>
-            <exception cref="T:System.IO.FileNotFoundException">The file cannot be found.</exception>
-            <exception cref="T:System.IO.InvalidDataException">The file contains invalid data.</exception>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.#ctor(System.IO.FileInfo)">
-            <summary>
-            Initializes a new instance of the StrongNameFile class.
-            </summary>
-            <param name="file">The SNK file to open.</param>
-            <exception cref="T:System.IO.FileNotFoundException">The file cannot be found.</exception>
-            <exception cref="T:System.IO.InvalidDataException">The file contains invalid data.</exception>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Save(System.String)">
-            <summary>
-            Saves this StrongNameFile instance to disk in the SNK file format.
-            </summary>
-            <param name="fileName">The filename to save to.</param>
-            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
-            <exception cref="T:System.NotSupportedException">The data cannot be exported.</exception>
-            <exception cref="T:System.ArgumentNullException"><paramref name="fileName"/> is a null reference.</exception>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Save(System.String,System.Boolean)">
-            <summary>
-            Saves this StrongNameFile instance to disk in the SNK file format.
-            </summary>
-            <param name="fileName">The filename to save to.</param>
-            <param name="includePrivateKey"><b>true</b> if the private key must be included, <b>false</b> otherwise.</param>
-            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
-            <exception cref="T:System.NotSupportedException">The private key is not available or the data cannot be exported.</exception>
-            <exception cref="T:System.ArgumentNullException"><paramref name="fileName"/> is a null reference.</exception>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Dispose">
-            <summary>
-            Releases all managed and unmanaged resources.
-            </summary>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.StrongNameFile.Finalize">
-            <summary>
-            Releases all managed and unmanaged resources.
-            </summary>
-        </member>
-        <member name="P:Org.Mentalis.Security.Tools.StrongNameFile.HasPrivateKey">
-            <summary>
-            Gets a value that indicates whether the SNK file contains a private key or not.
-            </summary>
-            <value><b>true</b> if the file contains a private key, <b>false</b> otherwise.</value>
-            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
-        </member>
-        <member name="P:Org.Mentalis.Security.Tools.StrongNameFile.PublicKey">
-            <summary>
-            Gets an <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the public key.
-            </summary>
-            <value>An <see cref="T:System.Security.Cryptography.RSA"/> instance.</value>
-            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
-        </member>
-        <member name="P:Org.Mentalis.Security.Tools.StrongNameFile.PrivateKey">
-            <summary>
-            Gets an <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the public/private key pair.
-            </summary>
-            <value>An <see cref="T:System.Security.Cryptography.RSA"/> instance.</value>
-            <exception cref="T:System.ObjectDisposedException">The object has been disposed.</exception>
-            <exception cref="T:System.NotSupportedException">The private key is not available.</exception>
         </member>
         <member name="T:Org.Mentalis.Security.Tools.CertificateSettings">
             <summary>
@@ -240,84 +349,6 @@
             Gets a collection of X509 extensions.
             </summary>
             <value>A <see cref="T:System.Security.Cryptography.X509Certificates.X509ExtensionCollection"/> instance.</value>
-        </member>
-        <member name="T:Org.Mentalis.Security.Tools.X509CertificateGenerator">
-            <summary>
-            Generates self-signed X509 certificates.
-            </summary>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.X509CertificateGenerator.Create(System.Security.Cryptography.RSACryptoServiceProvider,System.String)">
-            <summary>
-            Creates and returns a self-signed X509 certificate.
-            </summary>
-            <param name="key">The key of the certificate.</param>
-            <param name="issuerName">The encoded common name of the issuer.</param>
-            <returns>An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance.</returns>
-            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while creating the self-signed certificate.</exception>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.X509CertificateGenerator.Create(System.Security.Cryptography.RSACryptoServiceProvider,System.String,Org.Mentalis.Security.Tools.CertificateSettings)">
-            <summary>
-            Creates and returns a self-signed X509 certificate.
-            </summary>
-            <param name="key">The key of the certificate.</param>
-            <param name="issuerName">The encoded common name of the issuer.</param>
-            <param name="settings">The settings of the X509 certificate.</param>
-            <returns>An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance.</returns>
-            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while creating the self-signed certificate.</exception>
-        </member>
-        <member name="T:Org.Mentalis.Security.Tools.PrivateKeyFile">
-            <summary>
-            The PrivateKeyFile class represents a Private Key file (also known as a PVK
-            file). It can load PVK files and associate them with their corresponding
-            X509 certificates.
-            </summary>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.#ctor(System.String)">
-            <summary>
-            Initializes a new PrivateKeyFile instance.
-            </summary>
-            <param name="pvkFile">The file to load.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="pvkFile"/> is a null reference -or- a password is required.</exception>
-            <exception cref="T:System.IO.FileNotFoundException">The specified file could not be found.</exception>
-            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while decrypting the file.</exception>
-            <exception cref="T:System.IO.InvalidDataException">The file is invalid.</exception>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new PrivateKeyFile instance.
-            </summary>
-            <param name="pvkFile">The file to load.</param>
-            <param name="password">The password, if any.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="pvkFile"/> is a null reference -or- a password is required and <paramref name="password"/> is a null reference.</exception>
-            <exception cref="T:System.IO.FileNotFoundException">The specified file could not be found.</exception>
-            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while decrypting the file.</exception>
-            <exception cref="T:System.IO.InvalidDataException">The file is invalid.</exception>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.AssociateWith(System.Security.Cryptography.X509Certificates.X509Certificate)">
-            <summary>
-            Associates this private key instance with the corresponding X509 certificate.
-            </summary>
-            <param name="certificate">An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance to associate the key with.</param>
-            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while associating the private key with the certificate.</exception>
-            <remarks>The key will be imported as an exportable key.</remarks>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.AssociateWith(System.Security.Cryptography.X509Certificates.X509Certificate,System.Boolean)">
-            <summary>
-            Associates this private key instance with the corresponding X509 certificate.
-            </summary>
-            <param name="certificate">An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate"/> instance to associate the key with.</param>
-            <param name="exportable"><b>true</b> if the key should be marked as exportable, <b>false</b> otherwise.</param>
-            <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurs while associating the private key with the certificate.</exception>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.Dispose">
-            <summary>
-            Releases all managed and unmanaged resources.
-            </summary>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.PrivateKeyFile.Finalize">
-            <summary>
-            Releases all managed and unmanaged resources.
-            </summary>
         </member>
         <member name="T:Org.Mentalis.Security.Tools.CommonCertificateExtensions">
             <summary>
@@ -435,37 +466,6 @@
         </member>
         <member name="F:Org.Mentalis.Security.Tools.ReasonCodeExtension.RemoveFromCRL">
             <summary>The certificate must be removed from the CRL (because it has expired anyway). This is only used for delta-CRLs.</summary>
-        </member>
-        <member name="T:Org.Mentalis.Security.Tools.RSAExponentOfOne">
-            <summary>
-            The RSAExponentOfOne class generates so-called 'exponent-of-one' RSA keys. These keys are
-            special RSA keys, in the sense that the output buffer matches the input buffer for an
-            RSA encryption or decryption. Practically, this means that if you generate a key-exchange
-            message using a RSAPKCS1KeyExchangeFormatter class that was initialized with such a special
-            key, the resulting key exchange buffer will include the secret key unencrypted.
-            Exponent-of-one keys are very useful when you're in the debugging stage of your application.
-            You can use these keys instead of 'normal' RSA keys, and the entire system keeps working
-            as expected. The only difference is that the 'encrypted' data is the same as the unencrypted
-            data - a very useful feature for debugging purposes.
-            </summary>
-            <remarks>
-            Exponent-of-one keys should <b>never</b> be used in production! They do not offer any
-            security whatsoever.
-            </remarks>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.RSAExponentOfOne.Create">
-            <summary>
-            Creates a new exponent-of-one key.
-            </summary>
-            <returns>An <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the exponen-of-one key.</returns>
-            <remarks>The modulus length of this key will be 1024 bits.</remarks>
-        </member>
-        <member name="M:Org.Mentalis.Security.Tools.RSAExponentOfOne.Create(System.Int32)">
-            <summary>
-            Creates a new exponent-of-one key.
-            </summary>
-            <param name="bitLength">The length of the modulus, in bits.</param>
-            <returns>An <see cref="T:System.Security.Cryptography.RSA"/> instance that represents the exponen-of-one key.</returns>
         </member>
     </members>
 </doc>

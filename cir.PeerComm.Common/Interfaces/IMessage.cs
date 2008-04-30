@@ -6,38 +6,28 @@ using System.Text;
 namespace cir.PeerComm
 {
     /// <summary>
-    /// What a message should look like.
-    /// Feel free to add to this interface to suit your needs but 
-    /// the only field that isn't required is the MessageText field.
+    /// The minimum requirements for a message object, do not alter.
     /// </summary>
     public interface IMessage
     {
         /// <summary>
-        /// A unique ID for a message. (Require)
+        /// A unique ID for a message.
         /// Must be included
         /// </summary>
         Guid MessageID
         { get; set; }
 
         /// <summary>
-        /// Who the message is intended for. (Required)
+        /// Who the message is intended for. 
         /// If this is a broadcast message then the MessageTo GUID is all zeros.
         /// </summary>
         Guid MessageTo
         { get; set; }
 
         /// <summary>
-        /// Who the message is from. (Required)
+        /// Who the message is from.
         /// </summary>
         Guid MessageFrom
-        { get; set; }
-
-        /// <summary>
-        /// Text of the message. (Optional)
-        /// This is "optional" but you'll want to
-        /// have some kind of message content.
-        /// </summary>
-        string MessageText
         { get; set; }
 
     }

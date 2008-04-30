@@ -10,4 +10,3 @@ F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\obj\Debug
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\obj\Debug\cir.PeerComm.ClientExample.pdb
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\Org.Mentalis.Security.Tools.dll
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\Org.Mentalis.Security.Tools.xml
-F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.ClientExample\bin\Debug\Org.Mentalis.Security.Tools.pdb

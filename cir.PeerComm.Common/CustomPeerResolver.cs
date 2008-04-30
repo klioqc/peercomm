@@ -67,7 +67,7 @@ namespace cir.PeerComm
 
         private int _RefreshInterval = 2;
         /// <summary>
-        /// How long before an inactive peer is marked for removal
+        /// How long, in minutes, before an inactive peer is marked for removal
         /// </summary>
         public int RefreshInterval
         {
@@ -77,7 +77,7 @@ namespace cir.PeerComm
 
         private int _CleanupInterval = 5;
         /// <summary>
-        /// How often we check for inactive peers
+        /// How often, in minutes, we check for inactive peers
         /// </summary>
         public int CleanupInterval
         {
@@ -85,26 +85,40 @@ namespace cir.PeerComm
             set { _CleanupInterval = value; }
         }
 
-
+        /// <summary>
+        /// Create a custom peer resolver using the given channel name
+        /// </summary>
+        /// <param name="ChannelName"></param>
         public CustomPeerResolver(string ChannelName)
         {
             _ChannelName = ChannelName;
 
         }
 
+        /// <summary>
+        /// Create a custom peer resolver using the given channel name and password
+        /// </summary>
+        /// <param name="ChannelName"></param>
         public CustomPeerResolver(string ChannelName, string ChannelPassword)
         {
             _ChannelName = ChannelName;
             _ChannelPassword = ChannelPassword;
         }
 
-        public CustomPeerResolver(string ChannelName, string ChannelPassword, X509Certificate2 ChannelCert)
+        /// <summary>
+        /// Create a custom peer resolver using the given channel name, password, and channel certificate
+        /// </summary>
+        /// <param name="ChannelName"></param>
+         public CustomPeerResolver(string ChannelName, string ChannelPassword, X509Certificate2 ChannelCert)
         {
             _ChannelName = ChannelName;
             _ChannelPassword = ChannelPassword;
             _ChannelCert = ChannelCert;
         }
 
+        /// <summary>
+        /// Starts the custom peer resolver.
+        /// </summary>
         public void Start()
         {
             // Create a new resolver service

@@ -7,4 +7,3 @@ F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\cir.Peer
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\cir.PeerComm.pdb
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\Org.Mentalis.Security.Tools.dll
 F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\Org.Mentalis.Security.Tools.xml
-F:\Projects\00 Development\cir\cir.PeerComm\cir.PeerComm.Test\bin\Debug\Org.Mentalis.Security.Tools.pdb
