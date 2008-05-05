@@ -48,37 +48,17 @@ namespace cir.PeerComm
         public event PeerNodeDisconnectedHandler PeerNodeDisconnected;
 
         /// <summary>
-        /// Stores information about the PeerNode that created this communications node
+        /// The ID of the Peer that created this object
         /// </summary>
-        private PeerNode _ThisPeer;
-
-
-        /// <summary>
-        /// Create a new instance of the CommNode class with no security
-        /// </summary>
-        /// <param name="PeerNode"></param>
-        public CommChannel(PeerNode Peer)
-        {
-            //initialize(PeerNode, null);
-        }
+        private Guid _CreatorID;
 
         /// <summary>
         /// Create a new instance of the CommNode class with security
         /// </summary>
         /// <param name="PeerNode"></param>
-        public CommChannel(PeerNode Peer, string ChannelName, string ChannelPassword, X509Certificate2 ChannelCert)
+        public CommChannel(Guid ID)
         {
-            //initialize(PeerNode, null);
-        }
-
-
-        /// <summary>
-        /// Create a new instance of the CommNode class using a custom peer resolver instead of PNRP
-        /// </summary>
-        /// <param name="PeerNode"></param>
-        public CommChannel(PeerNode Peer, bool UseCustomePeerResolver)
-        {
-            //initialize(PeerNode, null);
+            _CreatorID = ID;
         }
         
         /// <summary>
@@ -86,25 +66,35 @@ namespace cir.PeerComm
         /// </summary>
         /// <param name="PeerNode"></param>
         /// <param name="Msg"></param>
-        public void SendMessage(Message Msg, byte[] MessageSignature)
+        public void SendMessage(Message Msg, byte[] Signature)
         {
-            // Check to make sure the message isn't from me
-            // And it's either to everyone or me specifically
-            if (Msg.MessageFrom != _ThisPeer.ID && (Msg.MessageTo == _BroadcastGuid || Msg.MessageTo == _ThisPeer.ID))
-            { 
-                
+            // Check to make sure the message isn't from this client
+            if (Msg.MessageFrom != _CreatorID)
+            {
+                if (MessageReceived != null)
+                {
+                    foreach (MessageReceivedHandler callback in MessageReceived.GetInvocationList())
+                    {
+                        callback.BeginInvoke(Msg, Signature, null, null);
+                    }
+                }
             }
         }
  
 
         public void Connect(PeerNode PeerNode)
         {
-            // Check to see if there is already a peer with that GUID
-                // Reject
-
-            // See if the GUID matches our GUID
-                // Add to list
-
+            // Check to make sure the message isn't from this client
+            if (Msg.MessageFrom != _CreatorID)
+            {
+                if (MessageReceived != null)
+                {
+                    foreach (MessageReceivedHandler callback in MessageReceived.GetInvocationList())
+                    {
+                        callback.BeginInvoke(Msg, Signature, null, null);
+                    }
+                }
+            }
         }
 
         public void Disconnect(PeerNode PeerNode)
